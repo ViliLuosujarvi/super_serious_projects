@@ -1,0 +1,56 @@
+# In short, read the code.
+
+# for long read:
+# This modification takes heavy usage of tools provided
+# in base theme kennethreitz which I have tried to reverse
+# engineer and understand to modify it to fit atleast with my purposes.
+# I needed the modification to simultaneously see whole path from 
+# home and just the exact directory. It is also nice to know which 
+# user @ hostname you are using especially if you know you'll use
+# the same configuration in multiple machines or VM's and at times need
+# to check which machine is in window you are modifying. Or when you enter 
+# a git repo, you'll immidiately get notified what is the state of the repo 
+
+
+# But anyways, idk, install:
+# I have it in my .dotfiles repo in:
+# .dotfiles/system/base/shells/oh-my-zsh/custom/themes
+
+# you can try to add it as you see fit on local machine or
+# your inside your own .dotfiles ¯\_(ツ)_/¯ 
+
+
+
+# If run as root, red. Else white
+if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="white"; fi
+
+# Shows exit status of latest command if not zero
+local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+
+# Main prompt:
+# Your job to figure out what it forms,
+# it's just convenient to know that this 
+# definitely does work somehow
+PROMPT='
+%F{magenta}%n%f @ %F{magenta}%m%f $(git_prompt_info) $(virtualenv_prompt_info)%{$fg[green]%}%~
+  %{$fg[yellow]%}%1~ %{$fg[magenta]%}%(!..  ) %{$reset_color%} '
+				# don't mind the combatant
+				# symbol from the Font Awesome, 
+				# he's just there to execute
+				# commands given by dude with 
+				# the keyboard. xd
+
+# Resets color idk
+PROMPT2='%{$fg[gray]%}\ %{$reset_color%}'
+
+# Right side of the prompt:
+# creates a clock that shows hours and minutes in cyan color
+RPS1='${return_code} %{$reset_color%} %{$fg[cyan]%}%D{[ %H:%M ]}'
+
+# Git prompt info
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[yellow]%}("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%} "
+ZSH_THEME_GIT_PROMPT_CLEAN=""
+# red bugs signify "dirty" repo, some changes have been made after
+# last pull which might conflict the repo if not in sync
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} %{$fg[yellow]%}"
