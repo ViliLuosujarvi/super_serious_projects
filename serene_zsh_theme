@@ -21,10 +21,14 @@
 
 
 
-# If run as root, red. Else white
+# If run as root, red, otherwise white unless declared otherwise
+# (newsflash, we'll declare colors above the white color in the
+# code later. xd)
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="white"; fi
 
 # Shows exit status of latest command if not zero
+# aka shows error numer and small red symbol to indicate
+# that something went wrong
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
 # Main prompt:
