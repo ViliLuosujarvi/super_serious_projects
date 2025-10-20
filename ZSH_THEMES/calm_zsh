@@ -44,7 +44,7 @@ PROMPT='
 				# commands given by dude with 
 				# the keyboard. xd
 
-# Resets color idk
+# Reset color
 PROMPT2='%{$fg[gray]%}\ %{$reset_color%}'
 
 # Right side of the prompt:
